@@ -32,21 +32,19 @@
     <!-- To Buy List -->
     <div class="col-md-6" ng-controller="ToBuyController as buylist">
      <h2>To Buy:</h2>
-     <ul>
+       <div class="row">
+         <ul>
+            <li ng-repeat="to_buy_item in buylist.to_buy_items">
+              <div class="col-md-5">
+                Buy {{to_buy_item.quantity}} {{to_buy_item.name}}
+              </div>
 
-         <div class="row" ng-repeat="to_buy_item in buylist.to_buy_items">
-            <li >
-            <div class="col-md-4">
-              Buy {{to_buy_item.quantity}} {{to_buy_item.name}}
-            </div>
-            <div class="col-md-2">
               <button class="btn btn-default" ng-click="buylist.buyItem($index)"><span class="glyphicon glyphicon-ok"></span> Bought</button>
-            </div>
-            </li>
-         </div>
 
-     </ul>
-     <div class="emptyMessage"ng-if="buylist.isEmpty()">Everything is bought!</div>
+            </li>
+         </ul>
+       </div>
+     <div class="emptyMessage" ng-if="buylist.isEmpty()">Everything is bought!</div>
     </div>
 
     <!-- Already Bought List -->
