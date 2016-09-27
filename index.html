@@ -3,6 +3,7 @@
   <head>
     <title>Shopping List Check Off</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
     <link rel="stylesheet" href="styles/bootstrap.min.css">
     <style>
       .emptyMessage {
@@ -29,27 +30,39 @@
   <div class="row">
 
     <!-- To Buy List -->
-    <div class="col-md-6">
+    <div class="col-md-6" ng-controller="ToBuyController as buylist">
      <h2>To Buy:</h2>
      <ul>
-       <li>Buy 10 cookies <button class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Bought</button></li>
-       <li>Buy 10 cookies <button class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Bought</button></li>
+
+         <div class="row" ng-repeat="to_buy_item in buylist.to_buy_items">
+            <li >
+            <div class="col-md-4">
+              Buy {{to_buy_item.quantity}} {{to_buy_item.name}}
+            </div>
+            <div class="col-md-2">
+              <button class="btn btn-default" ng-click="buylist.buyItem($index)"><span class="glyphicon glyphicon-ok"></span> Bought</button>
+            </div>
+            </li>
+         </div>
+
      </ul>
-     <div class="emptyMessage">Everything is bought!</div>
+     <div class="emptyMessage"ng-if="buylist.isEmpty()">Everything is bought!</div>
     </div>
 
     <!-- Already Bought List -->
-    <div class="col-md-6">
+    <div class="col-md-6" ng-controller="AlreadyBoughtController as boughtlist">
      <h2>Already Bought:</h2>
      <ul>
-       <li>Bought 10 cookies</li>
+       <li ng-repeat="bought_item in boughtlist.bought_items">
+         Bought {{bought_item.quantity}} {{bought_item.name}}
+       </li>
      </ul>
-     <div class="emptyMessage">Nothing bought yet.</div>
+     <div class="emptyMessage" ng-if="boughtlist.isEmpty()">Nothing bought yet.</div>
     </div>
   </div>
 </div>
 
-<script src="/scripts/angular.min.js"></script>
-<script src="/scripts/app.js"></script>
+<script src="scripts/angular.min.js"></script>
+<script src="scripts/app.js"></script>
 </body>
 </html>
